@@ -1,0 +1,253 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "console_title_template": "{{if .Root}}(admin) {{end}}{{.Folder}}",
+  "version": 2,
+  "final_space": true,
+  "palette": {
+    "red": "#ff0000",
+    "white": "#ffffff",
+    "orange": "#d75f00",
+    "text": "#bde2f0",
+    "sys-bg": "#c5c5c5",
+    "sys-text": "#1d78a9",
+    "current-folder-bg": "#1d78a9",
+    "current-folder-text": "#f2f3f8",
+    "lang-bg": "#1d78a9",
+    "lang-text": "#288cc2",
+    "lang-icon": "#f2f3f8",
+    "kubernetes-bg": "#2f6ae2",
+    "kubernetes-text": "#f2f3f8",
+    "kubernetes-icon": "#f2f3f8",
+    "aws-bg": "#f7f7f7",
+    "aws-text": "#202e3f",
+    "aws-icon": "#f79600",
+    "azure-bg": "#ebebeb",
+    "azure-text": "#0086cf",
+    "azure-icon": "#0086cf",
+    "docker-bg": "#2f6ae2",
+    "docker-text": "#f7f7f7",
+    "docker-icon": "#f7f7f7",
+    "git-bg": "#d75f00",
+    "git-text": "#f2f3f8",
+    "git-icon": "#f2f3f8",
+    "git-changed-bg": "#aa5a18"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "background": "transparent",
+          "foreground": "p:text",
+          "properties": {
+            "time_format": "2006-01-02 15:04:05"
+          },
+          "template": "\uf073 {{.CurrentDate | date .Format}} "
+        },
+        {
+          "type": "os",
+          "style": "plain",
+          "background": "p:sys-bg",
+          "foreground": "p:sys-text",
+          "properties": {
+            "alpine": "\uf300",
+            "arch": "\uf303",
+            "centos": "\uf304",
+            "debian": "\uf306",
+            "elementary": "\uf309",
+            "fedora": "\uf30a",
+            "gentoo": "\uf30d",
+            "linux": "\ue712",
+            "macos": "\ue711",
+            "manjaro": "\uf312",
+            "mint": "\uf30f",
+            "opensuse": "\uf314",
+            "raspbian": "\uf315",
+            "ubuntu": "\uf31c",
+            "windows": "\ue70f"
+          },
+          "template": " {{.Icon}}{{if .WSL}} (WSL){{end}}"
+        },
+        {
+          "type": "session",
+          "style": "plain",
+          "background": "p:sys-bg",
+          "foreground": "p:sys-text",
+          "template": " {{.UserName}}@{{.HostName}} "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "background": "p:current-folder-bg",
+          "foreground": "p:current-folder-text",
+          "template": " \uf07c {{ .Folder }} "
+        },
+
+        {
+          "type": "dotnet",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "template": "| <p:lang-icon>\ue77f {{ if .Unsupported }}\uf071{{ end }}</> "
+        },
+        {
+          "type": "angular",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "template": "| <p:lang-icon>\ue753{{ if .Error }}{{ .Error }}{{ end }}</> "
+        },   
+        {
+          "type": "node",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "properties": {
+            "fetch_package_manager": true,
+            "npm_icon": "\ue71e ",
+            "yarn_icon": "\ue6a7 "
+          },
+          "template": "| <p:lang-icon>\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ end }}</> "
+        },      
+        {
+          "type": "go",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "template": "| <p:lang-icon>\ue626 {{ if .Error }}{{ .Error }}{{ end }}</> "
+        },
+        {
+          "type": "java",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "template": "| <p:lang-icon>\ue738 {{ if .Error }}{{ .Error }}{{ end }}</> "
+        },
+        {
+          "type": "php",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "template": "| <p:lang-icon>\ue73d {{ if .Error }}{{ .Error }}{{ end }}</> "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "background": "p:lang-bg",
+          "foreground": "p:lang-text",
+          "template": "| <p:lang-icon>\ue235 {{ if .Error }}{{ .Error }}{{ end }}</> "
+        },
+        
+        {
+          "type": "kubectl",
+          "style": "plain",
+          "background": "p:kubernetes-bg",
+          "foreground": "p:kubernetes-text",
+          "template": " <p:kubernetes-icon>\udb84\udcfe</> {{.Context}}{{if .Namespace}} <p:kubernetes-icon>\uf061</> {{.Namespace}}{{end}}"
+        },
+        {
+          "type": "aws",
+          "style": "plain",
+          "background": "p:aws-bg",
+          "foreground": "p:aws-text",
+          "template": " <p:aws-icon>\uf270</> {{.Profile}}{{if .Region}} <p:aws-icon>\uf061</> {{.Region}}{{end}}"
+        },
+        {
+          "type": "az",
+          "style": "plain",
+          "background": "p:azure-bg",
+          "foreground": "p:azure-text",
+          "template": " <p:azure-icon>\uebd8</>  {{ .Name }} "
+        },
+        {
+          "type": "docker",
+          "style": "plain",
+          "background": "p:docker-bg",
+          "foreground": "p:docker-text",
+          "template": " <p:docker-icon>\uf308</> {{ .Context }} "
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "background": "p:git-bg",
+          "foreground": "p:git-text",
+          "properties": {
+            "branch_max_length": 30,
+            "fetch_stash_count": false,
+            "fetch_status": true,
+            "fetch_upstream_icon": true          
+          },
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-changed-bg{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-changed-bg{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git-changed-bg{{ end }}",
+            "{{ if gt .Behind 0 }}p:git-changed-bg{{ end }}"
+          ],
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        { 
+          "type": "executiontime",
+          "style": "plain",
+          "background": "transparent",
+          "foreground": "p:text",
+          "properties": {
+            "style": "austin",
+            "threshold": 0
+          },
+          "template": " {{.FormattedMs}} "
+        },
+        {
+          "type": "status",
+          "style": "plain",
+          "background": "p:red",
+          "foreground": "p:white",
+          "template": " {{ if gt .Code 0 }}\uea87 ERROR{{ end }} "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "path",
+          "style": "plain",
+          "background": "transparent",
+          "foreground": "p:text",
+          "properties": {
+            "style": "agnoster_full"
+          },
+          "template": "<p:orange>\udb85\udfa9</> \uf4d4  <p:orange>[</>{{.Path}}<p:orange>]</>"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "background": "transparent",
+          "foreground": "p:orange",
+          "template": "<p:orange>\udb85\udfa9</> {{ if .Root }}#{{else}}${{end}}",
+          "properties": {
+            "always_enabled": true
+          }
+        }
+      ]
+    }
+  ]
+}
